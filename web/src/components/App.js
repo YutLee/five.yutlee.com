@@ -1,18 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
+import './App.css'
 
-class App extends React.Component {
-
-	constructor(props) {
-    super(props);
+export default class App extends Component {
+  render() {
+    return (
+      <h1 className="app">Hello!</h1>
+    );
   }
-
-	render() {
-		return (
-			<div className="mod-box">
-        Hello w!
-      </div>
-		)
-	}
 }
-
-export default App;
