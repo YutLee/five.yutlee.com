@@ -62,7 +62,7 @@ const config = {
     historyApiFallback: true,//不跳转
     // inline: true,//实时刷新
     // hot: true,
-    port: 3002,
+    port: 4001,
     // Info: true
   }
 };
