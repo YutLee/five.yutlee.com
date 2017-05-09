@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
   entry: {
-    'react': ['react', 'react-dom', 'react-redux', 'redux'],
+    'redux-react': ['react', 'react-dom', 'react-router-dom', 'react-redux', 'redux'],
     'app': [
       'react-hot-loader/patch',
       path.resolve(__dirname, '../src/index')
@@ -12,7 +12,9 @@ const config = {
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: '[name].js'
+    publicPath: '/',
+    filename: 'js/[name].js',
+    chunkFilename: 'js/[name].js'
   },
   resolve: {
     extensions: ['.ts', '.js', '.json']
@@ -20,7 +22,8 @@ const config = {
   module: {
     rules: [
       // { enforce: 'pre', test: /\.js$/, exclude: /node_modules/, loader: 'eslint-loader' }
-      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
+      { test: /\.jsx?$/, include: path.resolve(__dirname, '../src'), exclude: /node_modules/, loader: 'babel-loader' },
+      // { test: /\.\.\/src\/components\/([^\/]+\/?[^\/]+).js$/, include: path.resolve(__dirname, '../src'), use: ['bundle-loader?lazy', 'babel-loader']},
       { test: /\.json$/, loader: 'json-loader' },
       // { test: /\.html/, loader: 'html-loader' },
       { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader' },
@@ -34,8 +37,15 @@ const config = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
     }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: ['redux-react'/*, 'vendor'*/],
+      // filename: 'js/react.js'
+      // async: true,
+      minChunks: 3,
+      // chunks:['app']
+    }),
     new HtmlWebpackPlugin({
-      chunks: ['react', 'app'],
+      // chunks: ['vendor', 'redux-react', 'app'],
       // excludeChunks: [], //排除块
       filename: 'index.html',
       template: path.resolve(__dirname, '../src/index.html'),

@@ -6,7 +6,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const config = {
   entry: {
-    'react': ['react', 'react-dom', 'react-redux', 'redux'],
+    'redux-react': ['react', 'react-dom', 'react-router-dom', 'react-redux', 'redux'],
     'app': [
       path.resolve(__dirname, '../src/index')
     ]
@@ -92,8 +92,11 @@ const config = {
       exclude: ['react.js']*/
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'react',
-      filename: 'js/react.js'
+      name: ['redux-react'/*, 'vendor'*/],
+      // filename: 'js/react.js'
+      // async: true,
+      minChunks: 3,
+      // chunks:['app']
     }),
     new webpack.optimize.UglifyJsPlugin({
       output: {
@@ -115,7 +118,7 @@ const config = {
       allChunks: true
     }),
     new HtmlWebpackPlugin({
-      chunks: ['react', 'app'],
+      // chunks: ['vendor', 'redux-react', 'app'],
       // excludeChunks: [], //排除块
       filename: 'index.html',
       template: path.resolve(__dirname, '../src/index.html'),

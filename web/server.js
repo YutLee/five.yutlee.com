@@ -27,9 +27,9 @@ const types = {
 
 const server = http.createServer(function (request, response) {
   let pathname = url.parse(request.url).pathname;
-  pathname = pathname == '/' ? '/index.html' : pathname;
+  pathname = pathname == '/' || !/\..*/.test(pathname) ? '/index.html' : pathname;
   const realPath = path.join(__dirname + '/dist', pathname);
-  // console.log(pathname, realPath);
+  console.log(pathname, realPath);
   let ext = path.extname(realPath);
   ext = ext ? ext.slice(1) : 'unknown';
   fs.exists(realPath, function (exists) {
