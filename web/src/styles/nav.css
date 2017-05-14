@@ -1,0 +1,19 @@
+
+.m-nav{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  text-align: center;
+  border-top: 1px solid #000;
+  height: 46px;
+
+  .item{
+    color: #666;
+
+    &.active {
+      color: #000;
+    }
+  }
+}

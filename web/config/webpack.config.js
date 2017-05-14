@@ -26,11 +26,36 @@ const config = {
       // { test: /\.\.\/src\/components\/([^\/]+\/?[^\/]+).js$/, include: path.resolve(__dirname, '../src'), use: ['bundle-loader?lazy', 'babel-loader']},
       { test: /\.json$/, loader: 'json-loader' },
       // { test: /\.html/, loader: 'html-loader' },
-      { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader' },
-      { test: /\.css$/, loader: 'style-loader!css-loader' },
+      // { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader' },
+      // { test: /\.css$/, loader: 'style-loader!css-loader' },
       { test: /\.(gif|png|jpe?g)$/i, loader: 'file-loader?name=../dist/img/[name].[ext]' },
       { test: /\.woff2?$/, loader: 'url-loader?name=../dist/fonts/[name].[ext]&limit=10000&mimetype=application/font-woff' },
       { test: /\.(ttf|eot|svg)$/, loader: 'file-loader?name=../dist/fonts/[name].[ext]' },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'//css-loader can't resolve correctly the path to the generated spritesheet. The possible solution is to skip url resolving.
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: function () {
+                return [
+                  require('precss'),
+                  require('autoprefixer')({
+                    browsers: ['last 2 versions', 'ie 9']
+                  }),
+                  require('cssnano')({safe: true})
+                ];
+              }
+            }
+          }
+        ]
+      },
     ]
   },
   plugins: [

@@ -1,0 +1,64 @@
+html {
+  background: #eee;
+  color: #333;
+  position: relative;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  line-height: 2;
+  position: relative;
+  min-height: 100%;
+  font-size: 12px;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+
+  &:hover {
+    color: #000;
+  }
+
+  /*&:visited {
+    color: #999;
+  }*/
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+dl {
+  list-style: none;
+  margin: 0;
+}
+dd {
+  margin: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  font-weight: normal;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+
+  .cell {
+    flex: 1;
+    display: block;
+    width: 0;
+    max-width: 100%;
+    flex-basis: 0;
+  }
+}
