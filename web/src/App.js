@@ -10,6 +10,7 @@ import loadHome from 'bundle-loader?lazy!./components/Home'
 import loadDiscovery from 'bundle-loader?lazy!./components/Discovery'
 import loadFocus from 'bundle-loader?lazy!./components/Focus'
 import loadMine from 'bundle-loader?lazy!./components/Mine'
+import loadLogin from 'bundle-loader?lazy!./components/Login'
 // import loadAbout from 'bundle-loader?lazy!./components/About'
 
 const Home = () => (
@@ -32,6 +33,11 @@ const Mine = () => (
     {(Mine) => <Mine/>}
   </Bundle>
 )
+const Login = () => (
+  <Bundle load={loadLogin}>
+    {(Login) => <Login/>}
+  </Bundle>
+)
 
 // const About = () => (
 //   <Bundle load={loadAbout}>
@@ -46,6 +52,7 @@ export default class App extends React.Component {
     Discovery(() => {})
     Focus(() => {})
     Mine(() => {})
+    Login(() => {})
     // About(() => {})
   }
 
@@ -57,6 +64,7 @@ export default class App extends React.Component {
           <Route path="/discovery" component={Discovery} />
           <Route path="/focus" component={Focus} />
           <Route path="/mine" component={Mine} />
+          <Route path="/login" component={Login} />
           <Nav/>
         </div>
       </BrowserRouter>

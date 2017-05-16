@@ -12,12 +12,14 @@ const ActiveLink = ({ children, to, active }) => (
 export default class Nav extends Component {
   render() {
     return (
-      <nav className="m-nav flex">
-        <ActiveLink to="/" active={true}><i className="icon icon-chose"></i><p>精选</p></ActiveLink>
-        <ActiveLink to="/discovery"><i className="icon icon-discovery"></i><p>发现</p></ActiveLink>
-        <ActiveLink to="/focus"><i className="icon icon-focus"></i><p>关注</p></ActiveLink>
-        <ActiveLink to="/mine"><i className="icon icon-mine"></i><p>我的</p></ActiveLink>
-      </nav>
+      <Route children={() => (
+        <nav className={['/', '/discovery', '/focus', '/mine'].indexOf(location.pathname) == -1 ? 'm-nav flex' : 'm-nav flex open'}>
+          <ActiveLink to="/" active={true}><i className="icon icon-chose"></i><p>精选</p></ActiveLink>
+          <ActiveLink to="/discovery"><i className="icon icon-discovery"></i><p>发现</p></ActiveLink>
+          <ActiveLink to="/focus"><i className="icon icon-focus"></i><p>关注</p></ActiveLink>
+          <ActiveLink to="/mine"><i className="icon icon-mine"></i><p>我的</p></ActiveLink>
+        </nav>
+      )}/>
     )
   }
 }
