@@ -1,9 +1,34 @@
-import React, { Component } from 'react';
+import React from 'react'
+import { Redirect } from 'react-router-dom'
+import Auth from './common/Auth'
 
-export default class Login extends Component {
+export default class Login extends React.Component {
+
+  state = {
+    redirectToReferrer: false
+  }
+
+  login = () => {
+    Auth.authenticate(() => {
+      this.setState({ redirectToReferrer: true })
+    })
+  }
+
   render() {
+    const { from } = {from: {pathname: '/'}}
+    const { redirectToReferrer } = this.state
+
+    if(redirectToReferrer) {
+      return (
+        <Redirect to={from}/>
+      )
+    }
+
     return (
-      <h1 className="app">登录</h1>
-    );
+      <div>
+        <p>请登录 {from.pathname}</p>
+        <button onClick={this.login}>Log in</button>
+      </div>
+    )
   }
 }

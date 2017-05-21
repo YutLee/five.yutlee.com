@@ -12,6 +12,7 @@ import loadFocus from 'bundle-loader?lazy!./components/Focus'
 import loadMine from 'bundle-loader?lazy!./components/Mine'
 import loadLogin from 'bundle-loader?lazy!./components/Login'
 // import loadAbout from 'bundle-loader?lazy!./components/About'
+import PrivateRoute from './components/common/PrivateRoute'
 
 const Home = () => (
   <Bundle load={loadHome}>
@@ -58,12 +59,12 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <BrowserRouter>
+      <BrowserRouter history={history}>
         <div>
           <Route exact path="/" component={Home} />
           <Route path="/discovery" component={Discovery} />
           <Route path="/focus" component={Focus} />
-          <Route path="/mine" component={Mine} />
+          <PrivateRoute path="/mine" component={Mine} />
           <Route path="/login" component={Login} />
           <Nav/>
         </div>
