@@ -22,7 +22,14 @@ const config = {
   module: {
     rules: [
       // { enforce: 'pre', test: /\.js$/, exclude: /node_modules/, loader: 'eslint-loader' }
-      { test: /\.jsx?$/, include: path.resolve(__dirname, '../src'), exclude: /node_modules/, loader: 'babel-loader' },
+      { test: /\.jsx?$/,
+        include: path.resolve(__dirname, '../src'),
+        exclude: /node_modules/,
+        use: [
+          'babel-loader',
+          'eslint-loader',
+        ]
+      },
       // { test: /\.\.\/src\/components\/([^\/]+\/?[^\/]+).js$/, include: path.resolve(__dirname, '../src'), use: ['bundle-loader?lazy', 'babel-loader']},
       { test: /\.json$/, loader: 'json-loader' },
       // { test: /\.html/, loader: 'html-loader' },
